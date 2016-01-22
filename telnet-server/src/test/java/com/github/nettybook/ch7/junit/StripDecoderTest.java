@@ -35,6 +35,7 @@ public class StripDecoderTest {
         embeddedChannel.writeInbound(request);
         
         ByteBuf response = (ByteBuf) embeddedChannel.readOutbound();
+        System.out.println(response.toString(Charset.defaultCharset()));
 
         assertEquals("a" + writeData + "a", response.toString(Charset.defaultCharset()));
 

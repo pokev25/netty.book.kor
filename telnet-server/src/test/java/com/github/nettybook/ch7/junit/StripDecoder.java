@@ -1,5 +1,8 @@
 package com.github.nettybook.ch7.junit;
 
+import java.nio.charset.Charset;
+
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
@@ -9,7 +12,9 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class StripDecoder extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object request) throws Exception {
-        String response = (String) request + "a";
+    	ByteBuf msg = (ByteBuf) request;
+    	
+        String response = "a" + msg.toString(Charset.defaultCharset()) + "a";
 
         ctx.writeAndFlush(Unpooled.wrappedBuffer(response.getBytes()));
     }

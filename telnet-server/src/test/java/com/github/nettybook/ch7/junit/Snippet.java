@@ -1,10 +1,5 @@
 package com.github.nettybook.ch7.junit;
 
-import static org.junit.Assert.*;
-
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 import org.junit.Test;
 
 public class Snippet {

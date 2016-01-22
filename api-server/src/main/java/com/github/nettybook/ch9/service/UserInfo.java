@@ -8,12 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import redis.clients.jedis.Jedis;
-
 import com.github.nettybook.ch9.core.ApiRequestTemplate;
-import com.github.nettybook.ch9.core.KeyMaker;
-import com.github.nettybook.ch9.service.dao.TokenKey;
-import com.google.gson.JsonObject;
 
 @Service("users")
 @Scope("prototype")

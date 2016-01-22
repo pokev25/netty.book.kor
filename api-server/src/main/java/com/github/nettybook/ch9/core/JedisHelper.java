@@ -63,14 +63,16 @@ public class JedisHelper {
      * @param jedis
      *            사용 완료된 제디스 객체
      */
-    final public void returnResource(Jedis jedis) {
+    @SuppressWarnings("deprecation")
+	final public void returnResource(Jedis jedis) {
         this.pool.returnResource(jedis);
     }
 
     /**
      * 제디스 연결풀을 제거한다.
      */
-    final public void destoryPool() {
+    @SuppressWarnings("deprecation")
+	final public void destoryPool() {
         Iterator<Jedis> jedisList = this.connectionList.iterator();
         while (jedisList.hasNext()) {
             Jedis jedis = jedisList.next();

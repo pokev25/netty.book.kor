@@ -29,6 +29,7 @@ public class Base64EncoderTest {
     @Test
     public void testEncoder() {
         String writeData = "안녕하세요";
+
         ByteBuf request = Unpooled.wrappedBuffer(writeData.getBytes());
 
         Base64Encoder encoder = new Base64Encoder();
@@ -37,7 +38,9 @@ public class Base64EncoderTest {
         embeddedChannel.writeOutbound(request);
         ByteBuf response = (ByteBuf) embeddedChannel.readOutbound();
 
-        String expect = "7JWI64WV7ZWY7IS47JqU";
+        //String expect = "7JWI64WV7ZWY7IS47JqU";
+        String expect = "vsiz58fPvLy/5A==";
+        
         assertEquals(expect, response.toString(Charset.defaultCharset()));
 
         embeddedChannel.finish();
