@@ -38,7 +38,9 @@ public class Base64EncoderTest {
         embeddedChannel.writeOutbound(request);
         ByteBuf response = (ByteBuf) embeddedChannel.readOutbound();
 
+        //JUnit테스트에서는 다음값이 PASS
         //String expect = "7JWI64WV7ZWY7IS47JqU";
+        //gradle test 에선 다음 값이 PASS
         String expect = "vsiz58fPvLy/5A==";
         
         assertEquals(expect, response.toString(Charset.defaultCharset()));
