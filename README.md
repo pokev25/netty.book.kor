@@ -3,7 +3,6 @@
 
 ### gradle 멀티 프로젝트 타입으로 수정 
 
-* windows 주의 사항
- * Base64EncoderTest실패 할 경우  
-   Gradle 빌드 환경 JAVA_OPTS= -Dfile.encoding=UTF-8 추가 필요함.
+* Base64EncoderTest실패 할 경우  
+  환경변수 JAVA_OPTS= -Dfile.encoding=UTF-8 추가 필요함.
 
