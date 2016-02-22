@@ -1,5 +1,7 @@
 package com.github.nettybook.ch7.junit;
 
+import java.util.Date;
+
 /*
  * Copyright 2012 The Netty Project
  *
@@ -21,12 +23,17 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Handles a server-side channel.
  */
 @Sharable
+@Slf4j
 public class TelnetServerHandlerV3 extends SimpleChannelInboundHandler<String> {
+
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -64,5 +71,29 @@ public class TelnetServerHandlerV3 extends SimpleChannelInboundHandler<String> {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();
         ctx.close();
+    }
+    
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        if (evt instanceof IdleStateEvent) {
+            IdleStateEvent e = (IdleStateEvent) evt;
+            
+          
+            if(e.state() == IdleState.ALL_IDLE){
+            	ctx.writeAndFlush("All IDLE "+ new Date().toString() +"\r\n");
+            	//log.info("All " + e.toString());
+            }else if(e.state() == IdleState.READER_IDLE){
+            	//log.info("Read " +e.toString());
+            	ctx.writeAndFlush("READER IDLE "+ new Date().toString() +"\r\n");
+            }else if(e.state() == IdleState.WRITER_IDLE){
+            	//log.info("Write " +e.toString());
+            	ctx.writeAndFlush("WRITER IDLE"+ new Date().toString() +" \r\n");
+            }else{
+            	//log.info("What the " +e.toString());
+            	ctx.writeAndFlush(" IDLE \n");
+            }
+            
+            
+        }
     }
 }

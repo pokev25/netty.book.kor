@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  	<property name="LOG_PATH" value="logs" />
+	<property name="LOG_FILE" value="telnet" />
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <file>${LOG_PATH}/${LOG_FILE}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_PATH}/${LOG_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>5MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 15 days' worth of history -->
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+   
+        <encoder>
+          <pattern>%date{dd HH:mm:ss} [%-5level] %c{0}:%L - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	  <encoder>
+	    <pattern>[%-5level] %c{0}:%L - %msg%n</pattern>
+	  </encoder>
+	</appender>
+  
+	<root level="info">
+	  <!-- <appender-ref ref="FILE" />  -->
+	  <appender-ref ref="STDOUT" />
+	</root>
+</configuration>

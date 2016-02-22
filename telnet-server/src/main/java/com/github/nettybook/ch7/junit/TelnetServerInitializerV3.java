@@ -1,5 +1,8 @@
 package com.github.nettybook.ch7.junit;
 
+import java.nio.charset.Charset;
+import java.util.concurrent.TimeUnit;
+
 /*
  * Copyright 2012 The Netty Project
  *
@@ -23,6 +26,7 @@ import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.timeout.IdleStateHandler;
 
 /**
  * Creates a newly configured {@link ChannelPipeline} for a new channel.
@@ -30,8 +34,8 @@ import io.netty.handler.codec.string.StringEncoder;
 public class TelnetServerInitializerV3 extends
         ChannelInitializer<SocketChannel> {
 
-    private static final StringDecoder DECODER = new StringDecoder();
-    private static final StringEncoder ENCODER = new StringEncoder();
+    private static final StringDecoder DECODER = new StringDecoder(Charset.forName("EUC-KR"));
+    private static final StringEncoder ENCODER = new StringEncoder(Charset.forName("EUC-KR"));
 
     private static final TelnetServerHandlerV3 
                       SERVER_HANDLER = new TelnetServerHandlerV3();
@@ -46,6 +50,7 @@ public class TelnetServerInitializerV3 extends
         // the encoder and decoder are static as these are sharable
         pipeline.addLast(DECODER);
         pipeline.addLast(ENCODER);
+        pipeline.addLast(new IdleStateHandler(0,0,10,TimeUnit.SECONDS));
 
         // and then business logic.
         pipeline.addLast(SERVER_HANDLER);
