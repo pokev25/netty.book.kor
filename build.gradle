@@ -2,6 +2,7 @@ plugins {
 	id 'io.franzbecker.gradle-lombok' version '3.3.0'
 	id 'java'
 }
+
 subprojects {
 
 	apply plugin: "java"
@@ -17,10 +18,13 @@ subprojects {
 		testImplementation 'junit:junit:4.13'
 	}
 
-	sourceCompatibility = 1.8
-	targetCompatibility = 1.8
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
 
 	tasks.withType(JavaCompile) {
-		options.encoding = 'UTF-8'
+		options.encoding = "UTF-8"
+	}
+	tasks.withType(Test) {
+		systemProperty "file.encoding", "UTF-8"
 	}
 }

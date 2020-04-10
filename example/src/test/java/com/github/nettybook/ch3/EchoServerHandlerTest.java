@@ -9,7 +9,8 @@ import io.netty.util.CharsetUtil;
 
 import static io.netty.util.ReferenceCountUtil.releaseLater;
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 
 public class EchoServerHandlerTest {
 	@Test

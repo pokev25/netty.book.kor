@@ -39,7 +39,6 @@ public class Base64EncoderTest {
         ByteBuf response = (ByteBuf) embeddedChannel.readOutbound();
 
         String expect = "7JWI64WV7ZWY7IS47JqU";
-        
         assertEquals(expect, response.toString(Charset.defaultCharset()));
 
         embeddedChannel.finish();

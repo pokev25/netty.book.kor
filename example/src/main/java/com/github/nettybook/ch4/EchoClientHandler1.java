@@ -64,9 +64,4 @@ public class EchoClientHandler1 extends ChannelOutboundHandlerAdapter {
         super.disconnect(ctx, promise);
     }
 
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();
-        ctx.close();
-    }
 }

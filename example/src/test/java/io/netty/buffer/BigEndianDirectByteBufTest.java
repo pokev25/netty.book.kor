@@ -19,27 +19,29 @@ import static org.junit.Assert.*;
 
 import java.nio.ByteOrder;
 
+import org.junit.Test;
+
 /**
  * Tests big-endian direct channel buffers
  */
 public class BigEndianDirectByteBufTest extends AbstractByteBufTest {
 
-    private ByteBuf buffer;
-
     @Override
-    protected ByteBuf newBuffer(int length) {
-        buffer = newDirectBuffer(length);
+    protected ByteBuf newBuffer(int length, int maxCapacity) {
+        ByteBuf buffer = newDirectBuffer(length, maxCapacity);
         assertSame(ByteOrder.BIG_ENDIAN, buffer.order());
         assertEquals(0, buffer.writerIndex());
         return buffer;
     }
 
-    @Override
-    protected ByteBuf[] components() {
-        return new ByteBuf[] { buffer };
+    protected ByteBuf newDirectBuffer(int length, int maxCapacity) {
+        return new UnpooledDirectByteBuf(UnpooledByteBufAllocator.DEFAULT, length, maxCapacity);
     }
 
-    protected ByteBuf newDirectBuffer(int length) {
-        return new UnpooledDirectByteBuf(UnpooledByteBufAllocator.DEFAULT, length, Integer.MAX_VALUE);
+    @Test
+    public void testIsContiguous() {
+        ByteBuf buf = newBuffer(4);
+        assertTrue(buf.isContiguous());
+        buf.release();
     }
 }
