@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
-@ComponentScan("com.github.nettybook.ch8.spring")
+@ComponentScan("com.github.nettybook.ch7.spring")
 @PropertySource("classpath:telnet-server.properties")
 public class TelnetServerConfig {
 	@Value("${boss.thread.count}")

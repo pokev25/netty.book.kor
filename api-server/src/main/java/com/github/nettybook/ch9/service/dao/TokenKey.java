@@ -1,8 +1,7 @@
 package com.github.nettybook.ch9.service.dao;
 
-import redis.clients.util.MurmurHash;
-
 import com.github.nettybook.ch9.core.KeyMaker;
+import redis.clients.jedis.util.MurmurHash;
 
 public class TokenKey implements KeyMaker {
     static final int SEED_MURMURHASH = 0x1234ABCD;

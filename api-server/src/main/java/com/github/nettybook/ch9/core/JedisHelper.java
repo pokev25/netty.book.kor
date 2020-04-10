@@ -65,7 +65,7 @@ public class JedisHelper {
      */
     @SuppressWarnings("deprecation")
 	final public void returnResource(Jedis jedis) {
-        this.pool.returnResource(jedis);
+        jedis.close();
     }
 
     /**
@@ -76,7 +76,7 @@ public class JedisHelper {
         Iterator<Jedis> jedisList = this.connectionList.iterator();
         while (jedisList.hasNext()) {
             Jedis jedis = jedisList.next();
-            this.pool.returnResource(jedis);
+            jedis.close();
         }
 
         this.pool.destroy();
